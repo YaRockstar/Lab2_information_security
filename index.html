@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/img/cipher.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Шифр Виженера</title>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1 class="work-title">Лабораторная работа №2</h1>
+      </header>
+      <main>
+        <p class="hint">Выберите язык:</p>
+        <div class="high-buttons">
+          <button class="russian-btn lang-btn">Русский</button>
+          <button class="reset-btn">Сбросить</button>
+          <button class="english-btn lang-btn">English</button>
+        </div>
+        <p class="lang-error error"></p>
+        <div class="inputs">
+          <p class="hint">Введите текст (нижний регистр / буквы + цифры):</p>
+          <div class="inputs__text">
+            <input class="input-text" type="text" />
+            <p class="text-error error"></p>
+          </div>
+          <p class="hint">Введите ключ (нижний регистр / только буквы):</p>
+          <div class="inputs__key">
+            <input class="input-key" type="text" />
+            <p class="key-error error"></p>
+          </div>
+          <div class="encryption">
+            <p class="encrypted-text"></p>
+            <button class="encrypt-btn">Зашифровать</button>
+          </div>
+          <div class="decryption">
+            <p class="decrypted-text"></p>
+            <button class="decrypt-btn">Расшифровать</button>
+          </div>
+        </div>
+      </main>
+      <footer class="footer">
+        <p>Работу выполнил: студент группы 09-001 Калашников Я.Е.</p>
+      </footer>
+    </div>
+    <script src="main.js" type="module"></script>
+  </body>
+</html>
