@@ -11,6 +11,10 @@ export class Encryptor {
 
   // Метод, шифрующий символ по буквенному ключу.
   encryptSymbol(symbol, symbolKey) {
+    if (symbol === ' ') {
+      return symbol;
+    }
+
     let index = this.alphabet.indexOf(symbol);
     let symbolKeyIndex = this.alphabet.indexOf(symbolKey);
 
@@ -22,25 +26,21 @@ export class Encryptor {
     return this.alphabet[index + symbolKeyIndex];
   }
 
-  // Метод, шифрующий слово по ключу.
-  encryptWord(word, key) {
-    return word
+  // Метод, шифрующий текст по ключу.
+  encryptText(text, key) {
+    key = this.shortenKey(key, text);
+    return text
       .split('')
       .map((symbol, index) => this.encryptSymbol(symbol, key[index]))
       .join('');
   }
 
-  // Метод, шифрующий текст по ключу.
-  encryptText(text, key) {
-    key = this.shortenKey(key, text);
-    return text
-      .split(' ')
-      .map(word => this.encryptWord(word, key))
-      .join(' ');
-  }
-
   // Метод, расшифровывающий символ по буквенному ключу.
   decryptSymbol(symbol, symbolKey) {
+    if (symbol === ' ') {
+      return symbol;
+    }
+
     let index = this.alphabet.indexOf(symbol);
     let symbolKeyIndex = this.alphabet.indexOf(symbolKey);
 
@@ -51,21 +51,13 @@ export class Encryptor {
     return this.alphabet[index - symbolKeyIndex];
   }
 
-  // Метод, расшифровывающий слово по ключу.
-  decryptWord(word, key) {
-    return word
-      .split('')
-      .map((symbol, index) => this.decryptSymbol(symbol, key[index]))
-      .join('');
-  }
-
   // Метод, расшифровывающий текст по ключу.
   decryptText(text, key) {
     key = this.shortenKey(key, text);
     return text
-      .split(' ')
-      .map(word => this.decryptWord(word, key))
-      .join(' ');
+      .split('')
+      .map((symbol, index) => this.decryptSymbol(symbol, key[index]))
+      .join('');
   }
 
   // Дополняет ключ (если он меньше длины текста без пробелов)
@@ -75,6 +67,8 @@ export class Encryptor {
       .split('')
       .filter(symbol => symbol !== ' ')
       .join('');
+
+    const spaces = {};
 
     const spaceCount = text
       .split('')
@@ -87,6 +81,13 @@ export class Encryptor {
 
     if (key.length > textLength) {
       key = key.substring(0, textLength);
+    }
+
+    for (let i = 0; i < text.length; i++) {
+      if (text[i] === ' ') {
+        key = key.substring(0, i) + ' ' + key.substring(i);
+        // console.log(key);
+      }
     }
 
     return key;
