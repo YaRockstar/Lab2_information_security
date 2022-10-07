@@ -28,7 +28,7 @@ export class Encryptor {
 
   // Метод, шифрующий текст по ключу.
   encryptText(text, key) {
-    key = this.shortenKey(key, text);
+    key = this.transformKey(key, text);
     return text
       .split('')
       .map((symbol, index) => this.encryptSymbol(symbol, key[index]))
@@ -53,7 +53,7 @@ export class Encryptor {
 
   // Метод, расшифровывающий текст по ключу.
   decryptText(text, key) {
-    key = this.shortenKey(key, text);
+    key = this.transformKey(key, text);
     return text
       .split('')
       .map((symbol, index) => this.decryptSymbol(symbol, key[index]))
@@ -62,7 +62,7 @@ export class Encryptor {
 
   // Дополняет ключ (если он меньше длины текста без пробелов)
   // или укорачивает ключ (если его длина больше).
-  shortenKey(key, text) {
+  transformKey(key, text) {
     key = key.replaceAll(' ', '');
 
     const spaceCount = text
@@ -81,9 +81,11 @@ export class Encryptor {
     for (let i = 0; i < text.length; i++) {
       if (text[i] === ' ') {
         key = `${key.substring(0, i)} ${key.substring(i)}`;
+        console.log(key);
       }
     }
-
+    console.log(text);
+    console.log(key);
     return key;
   }
 }
