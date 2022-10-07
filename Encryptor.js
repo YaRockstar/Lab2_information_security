@@ -63,12 +63,7 @@ export class Encryptor {
   // Дополняет ключ (если он меньше длины текста без пробелов)
   // или укорачивает ключ (если его длина больше).
   shortenKey(key, text) {
-    key = key
-      .split('')
-      .filter(symbol => symbol !== ' ')
-      .join('');
-
-    const spaces = {};
+    key = key.replaceAll(' ', '');
 
     const spaceCount = text
       .split('')
@@ -85,8 +80,7 @@ export class Encryptor {
 
     for (let i = 0; i < text.length; i++) {
       if (text[i] === ' ') {
-        key = key.substring(0, i) + ' ' + key.substring(i);
-        // console.log(key);
+        key = `${key.substring(0, i)} ${key.substring(i)}`;
       }
     }
 
