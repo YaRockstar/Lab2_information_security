@@ -84,8 +84,7 @@ export class Encryptor {
         console.log(key);
       }
     }
-    console.log(text);
-    console.log(key);
+
     return key;
   }
 }
